@@ -6,9 +6,9 @@ import { useAuth } from "@/context/AuthContext";
 
 const features = [
   {
-    title: "Organize Your Wardrobe",
+    title: "Organize seu guarda-roupa",
     description:
-      "Upload and categorize your clothing items to keep track of everything you own.",
+      "Carregue e categorize suas peças de roupa para controlar tudo o que você possui.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-wardrobe-600">
         <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />
@@ -16,9 +16,9 @@ const features = [
     ),
   },
   {
-    title: "Automatic Classification",
+    title: "Classificação Automática",
     description:
-      "Clothing items are automatically classified by type: tops, bottoms, shoes, and accessories.",
+      "Os itens de vestuário são classificados automaticamente por tipo: blusas, calças, sapatos e acessórios.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-wardrobe-600">
         <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
@@ -28,9 +28,9 @@ const features = [
     ),
   },
   {
-    title: "Personalized Profiles",
+    title: "Perfis personalizados",
     description:
-      "Create and customize your profile to make the most of your virtual wardrobe experience.",
+      "Crie e personalize seu perfil para aproveitar ao máximo sua experiência de guarda-roupa virtual.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-wardrobe-600">
         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
@@ -53,29 +53,29 @@ const Index = () => {
         <div className="container relative z-10 mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-6 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-              Organize Your Wardrobe Digitally
+              Organize seu guarda-roupa digitalmente
             </h1>
             <p className="mb-8 text-xl text-wardrobe-100">
-              Upload, categorize, and manage your clothing items all in one place.
-              Your virtual closet awaits!
+              Carregue, categorize e gerencie suas peças de roupa em um só lugar.
+              Seu closet virtual está esperando!
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               {user ? (
                 <Link to="/dashboard">
                   <Button size="lg" className="bg-white text-wardrobe-800">
-                    Go to My Wardrobe
+                    Meu Closetify
                   </Button>
                 </Link>
               ) : (
                 <>
                   <Link to="/register">
                     <Button size="lg" className="bg-white text-wardrobe-800">
-                      Get Started
+                      Comece Agora
                     </Button>
                   </Link>
                   <Link to="/login">
                     <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20">
-                      Sign In
+                      Entrar
                     </Button>
                   </Link>
                 </>
@@ -89,7 +89,7 @@ const Index = () => {
       <section className="bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-            Everything You Need for Your Virtual Wardrobe
+            Tudo o que você precisa para seu guarda-roupa virtual
           </h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {features.map((feature, index) => (
@@ -112,37 +112,37 @@ const Index = () => {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <h2 className="mb-16 text-center text-3xl font-bold md:text-4xl">
-            How It Works
+            Como Funciona
           </h2>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
             <div className="flex flex-col items-center text-center">
               <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-wardrobe-100 text-2xl font-bold text-wardrobe-600">
                 1
               </div>
-              <h3 className="mb-3 text-xl font-semibold">Create an Account</h3>
+              <h3 className="mb-3 text-xl font-semibold">Crie uma conta</h3>
               <p className="text-gray-600">
-                Sign up and create your personal profile to get started with your
-                virtual wardrobe.
+                Cadastre-se e crie seu perfil pessoal para começar a usar seu
+                guarda-roupa virtual.
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-wardrobe-100 text-2xl font-bold text-wardrobe-600">
                 2
               </div>
-              <h3 className="mb-3 text-xl font-semibold">Upload Your Items</h3>
+              <h3 className="mb-3 text-xl font-semibold">Envie seus itens</h3>
               <p className="text-gray-600">
-                Take photos of your clothing items and upload them to your virtual
-                wardrobe with descriptions.
+                Tire fotos das suas peças de roupa e carregue-as no seu guarda-roupa
+                virtual com descrições.
               </p>
             </div>
             <div className="flex flex-col items-center text-center">
               <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-wardrobe-100 text-2xl font-bold text-wardrobe-600">
                 3
               </div>
-              <h3 className="mb-3 text-xl font-semibold">Organize & Manage</h3>
+              <h3 className="mb-3 text-xl font-semibold">Organize e Gerencie</h3>
               <p className="text-gray-600">
-                Your items will be automatically categorized, making it easy to
-                browse and manage your collection.
+                Seus itens serão categorizados automaticamente, facilitando
+                a navegação e o gerenciamento da sua coleção.
               </p>
             </div>
           </div>
@@ -153,19 +153,19 @@ const Index = () => {
       <section className="bg-wardrobe-50 py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-6 text-3xl font-bold md:text-4xl">
-            Ready to Organize Your Wardrobe?
+            Pronto para organizar seu guarda-roupa?
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-            Join thousands of users who have already digitized their wardrobes and
-            enjoy a more organized closet experience.
+            Junte-se a closetify e digitalize seu guarda-roupas e
+            desfrute de uma experiência de um espaço mais organizado.
           </p>
           {user ? (
             <Link to="/dashboard">
-              <Button size="lg">Go to Dashboard</Button>
+              <Button size="lg">Vá ao Guarda-Roupa</Button>
             </Link>
           ) : (
             <Link to="/register">
-              <Button size="lg">Get Started Now</Button>
+              <Button size="lg">Comece Agora</Button>
             </Link>
           )}
         </div>
@@ -175,26 +175,26 @@ const Index = () => {
       <footer className="bg-gray-900 py-12 text-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center">
-            <h3 className="mb-4 text-xl font-bold">StyleStash</h3>
+            <h3 className="mb-4 text-xl font-bold">ClosetIfy</h3>
             <p className="mb-8 text-gray-400">
-              Your virtual wardrobe management solution
+              Comece Sua solução de gerenciamento de guarda-roupa virtual
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-gray-400 hover:text-white">
-                About
+                Sobre
               </a>
               <a href="#" className="text-gray-400 hover:text-white">
-                Privacy
+                Privacidade
               </a>
               <a href="#" className="text-gray-400 hover:text-white">
-                Terms
+                Termos
               </a>
               <a href="#" className="text-gray-400 hover:text-white">
-                Contact
+                Contato
               </a>
             </div>
             <p className="mt-8 text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} StyleStash. All rights reserved.
+              &copy; {new Date().getFullYear()} ClosetIfy. Todos direitos reservados.
             </p>
           </div>
         </div>

@@ -29,8 +29,8 @@ const Dashboard = () => {
     <div className="container py-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">My Wardrobe</h1>
-          <p className="text-gray-500">Manage your clothing items</p>
+          <h1 className="text-3xl font-bold">Meu ClosetIfy</h1>
+          <p className="text-gray-500">Gerencie seus itens de vestuário</p>
         </div>
 
         <Dialog open={open} onOpenChange={setOpen}>
@@ -48,9 +48,9 @@ const Dashboard = () => {
 
       <Tabs defaultValue="wardrobe" className="w-full">
         <TabsList className="mb-6">
-          <TabsTrigger value="wardrobe">My Items</TabsTrigger>
-          <TabsTrigger value="outfits">My Outfits</TabsTrigger>
-          <TabsTrigger value="stats">Stats</TabsTrigger>
+          <TabsTrigger value="wardrobe">Meus Items</TabsTrigger>
+          <TabsTrigger value="outfits">Minhas roupas</TabsTrigger>
+          <TabsTrigger value="stats">Estatísticas</TabsTrigger>
         </TabsList>
 
         <TabsContent value="wardrobe" className="mt-0">
@@ -59,18 +59,18 @@ const Dashboard = () => {
 
         <TabsContent value="outfits" className="mt-0">
           <div className="flex h-64 flex-col items-center justify-center rounded-lg border border-dashed">
-            <h3 className="text-lg font-medium">Coming Soon</h3>
+            <h3 className="text-lg font-medium">Em Breve</h3>
             <p className="text-sm text-gray-500">
-              Create and manage your outfits
+              Crie e gerencie suas roupas
             </p>
           </div>
         </TabsContent>
 
         <TabsContent value="stats" className="mt-0">
           <div className="flex h-64 flex-col items-center justify-center rounded-lg border border-dashed">
-            <h3 className="text-lg font-medium">Coming Soon</h3>
+            <h3 className="text-lg font-medium">Em Breve</h3>
             <p className="text-sm text-gray-500">
-              View statistics about your wardrobe
+              Veja estatísticas sobre seu guarda-roupa
             </p>
           </div>
         </TabsContent>
