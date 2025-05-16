@@ -71,13 +71,13 @@ export const WardrobeProvider = ({ children }: { children: React.ReactNode }) =>
     try {
       // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       const item: ClothingItem = {
         ...newItem,
         _id: Math.random().toString(36).substr(2, 9),
         createdAt: new Date().toISOString(),
       };
-      
+
       setItems([...items, item]);
       toast({
         title: 'Item added',
@@ -99,7 +99,7 @@ export const WardrobeProvider = ({ children }: { children: React.ReactNode }) =>
     try {
       // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      
+
       setItems(items.filter(item => item._id !== id));
       toast({
         title: 'Item removed',

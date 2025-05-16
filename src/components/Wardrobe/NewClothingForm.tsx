@@ -1,10 +1,10 @@
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useWardrobe } from "@/context/WardrobeContext";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -26,6 +26,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/components/ui/use-toast";
 import { Upload } from "lucide-react";
+import {
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -50,6 +54,7 @@ type FormValues = z.infer<typeof formSchema>;
 const NewClothingForm = () => {
   const { addItem, isLoading } = useWardrobe();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -79,8 +84,8 @@ const NewClothingForm = () => {
   const onSubmit = async (values: FormValues) => {
     if (!image) {
       toast({
-        title: "Image required",
-        description: "Please upload an image for your clothing item",
+        title: t.general.error,
+        description: t.clothing.imageRequired,
         variant: "destructive",
       });
       return;
@@ -110,7 +115,10 @@ const NewClothingForm = () => {
 
   return (
     <div className="rounded-lg border bg-card p-6 shadow-sm">
-      <h3 className="mb-4 text-lg font-semibold">Add New Clothing Item</h3>
+      <DialogTitle className="mb-2 text-lg font-semibold">{t.clothing.addNewItem}</DialogTitle>
+      <DialogDescription className="mb-4 text-sm text-gray-500">
+        {t.clothing.uploadDetails}
+      </DialogDescription>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -121,9 +129,9 @@ const NewClothingForm = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>{t.clothing.nameLabel}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Blue T-Shirt" {...field} />
+                      <Input placeholder={t.clothing.namePlaceholder} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -135,21 +143,21 @@ const NewClothingForm = () => {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>{t.clothing.category}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
+                          <SelectValue placeholder={t.clothing.selectCategory} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="top">Top</SelectItem>
-                        <SelectItem value="bottom">Bottom</SelectItem>
-                        <SelectItem value="shoes">Shoes</SelectItem>
-                        <SelectItem value="accessory">Accessory</SelectItem>
+                        <SelectItem value="top">{t.clothing.tops}</SelectItem>
+                        <SelectItem value="bottom">{t.clothing.bottoms}</SelectItem>
+                        <SelectItem value="shoes">{t.clothing.footwear}</SelectItem>
+                        <SelectItem value="accessory">{t.clothing.accessories}</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -162,9 +170,9 @@ const NewClothingForm = () => {
                 name="color"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Color</FormLabel>
+                    <FormLabel>{t.clothing.color}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Blue" {...field} />
+                      <Input placeholder={t.clothing.colorPlaceholder} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -177,7 +185,7 @@ const NewClothingForm = () => {
                 render={() => (
                   <FormItem>
                     <div className="mb-2">
-                      <FormLabel>Seasons</FormLabel>
+                      <FormLabel>{t.clothing.season}</FormLabel>
                     </div>
                     <div className="flex flex-wrap gap-4">
                       {["spring", "summer", "fall", "winter"].map((season) => (
@@ -206,7 +214,7 @@ const NewClothingForm = () => {
                                   />
                                 </FormControl>
                                 <FormLabel className="text-sm font-normal capitalize">
-                                  {season}
+                                  {t.clothing[season as keyof typeof t.clothing]}
                                 </FormLabel>
                               </FormItem>
                             );
@@ -224,10 +232,10 @@ const NewClothingForm = () => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>{t.clothing.descriptionLabel}</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="A comfortable cotton t-shirt"
+                        placeholder={t.clothing.descriptionPlaceholder}
                         rows={3}
                         {...field}
                       />
@@ -239,7 +247,10 @@ const NewClothingForm = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center">
-              <div className="mb-4 flex h-48 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 transition-colors hover:bg-gray-100">
+              <label 
+                htmlFor="image-upload" 
+                className="mb-4 flex h-48 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 transition-colors hover:bg-gray-100"
+              >
                 {imagePreview ? (
                   <img
                     src={imagePreview}
@@ -250,20 +261,19 @@ const NewClothingForm = () => {
                   <>
                     <Upload className="mb-2 h-8 w-8 text-gray-400" />
                     <p className="mb-2 text-sm text-gray-500">
-                      <span className="font-semibold">Click to upload</span> or drag
-                      and drop
+                      <span className="font-semibold">{t.clothing.clickToUpload}</span> {t.clothing.orDragAndDrop}
                     </p>
-                    <p className="text-xs text-gray-500">PNG, JPG or WEBP</p>
+                    <p className="text-xs text-gray-500">{t.clothing.imageFormats}</p>
                   </>
                 )}
                 <Input
                   id="image-upload"
                   type="file"
                   accept="image/*"
-                  className="absolute h-full w-full cursor-pointer opacity-0"
+                  className="hidden"
                   onChange={handleImageChange}
                 />
-              </div>
+              </label>
               {imagePreview && (
                 <Button
                   type="button"
@@ -274,14 +284,14 @@ const NewClothingForm = () => {
                   }}
                   className="mt-2"
                 >
-                  Remove Image
+                  {t.clothing.removeImage}
                 </Button>
               )}
             </div>
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Adding..." : "Add Item"}
+            {isLoading ? t.general.loading : t.wardrobe.addItem}
           </Button>
         </form>
       </Form>

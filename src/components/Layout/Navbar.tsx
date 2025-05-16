@@ -26,7 +26,7 @@ const Navbar = () => {
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
             <div className="container flex h-16 items-center justify-between">
                 <Link to="/" className="flex items-center">
-                    <span className="text-xl font-bold text-wardrobe-600">StyleStash</span>
+                    <span className="text-xl font-bold text-wardrobe-600">ClosetIfy</span>
                 </Link>
 
                 {user ? (

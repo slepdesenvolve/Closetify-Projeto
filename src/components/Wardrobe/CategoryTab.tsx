@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ClothingCard from "./ClothingCard";
 import { useWardrobe } from "@/context/WardrobeContext";
 import { ShirtIcon, PantsIcon, ShoesIcon, WatchIcon } from "@/components/Icons";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface CategoryIconProps {
   category: string;
@@ -27,12 +28,14 @@ const CategoryIcon: React.FC<CategoryIconProps> = ({ category, className }) => {
 
 const CategoryTab = () => {
   const { items } = useWardrobe();
+  const { t } = useLanguage();
+  
   const categories = [
-    { id: "all", name: "All" },
-    { id: "top", name: "Tops" },
-    { id: "bottom", name: "Bottoms" },
-    { id: "shoes", name: "Shoes" },
-    { id: "accessory", name: "Accessories" },
+    { id: "all", name: t.clothing.all },
+    { id: "top", name: t.clothing.tops },
+    { id: "bottom", name: t.clothing.bottoms },
+    { id: "shoes", name: t.clothing.footwear },
+    { id: "accessory", name: t.clothing.accessories },
   ];
 
   return (
@@ -58,9 +61,9 @@ const CategoryTab = () => {
             items.map((item) => <ClothingCard key={item._id} item={item} />)
           ) : (
             <div className="col-span-full flex flex-col items-center justify-center rounded-lg border border-dashed py-12">
-              <h3 className="text-lg font-medium">No items yet</h3>
+              <h3 className="text-lg font-medium">{t.wardrobe.noItems}</h3>
               <p className="text-sm text-gray-500">
-                Add clothing items to your wardrobe
+                {t.wardrobe.addItem}
               </p>
             </div>
           )}
@@ -77,9 +80,9 @@ const CategoryTab = () => {
             ) : (
               <div className="col-span-full flex flex-col items-center justify-center rounded-lg border border-dashed py-12">
                 <CategoryIcon category={category.id} className="mb-2 h-8 w-8 text-gray-400" />
-                <h3 className="text-lg font-medium">No {category.name.toLowerCase()} yet</h3>
+                <h3 className="text-lg font-medium">{t.wardrobe.noItemsCategory.replace('{category}', category.name.toLowerCase())}</h3>
                 <p className="text-sm text-gray-500">
-                  Add {category.name.toLowerCase()} to your wardrobe
+                  {t.wardrobe.addItemCategory.replace('{category}', category.name.toLowerCase())}
                 </p>
               </div>
             )}

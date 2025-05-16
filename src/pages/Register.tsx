@@ -1,9 +1,11 @@
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -33,6 +35,7 @@ const formSchema = z.object({
 
 const Register = () => {
   const { register: registerUser, isLoading } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,9 +61,9 @@ const Register = () => {
     <div className="flex min-h-[calc(100vh-4rem)] flex-col justify-center">
       <div className="mx-auto flex w-full flex-col space-y-6 sm:w-[350px] md:w-[450px]">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-3xl font-bold text-wardrobe-600">Create an account</h1>
+          <h1 className="text-3xl font-bold text-wardrobe-600">{t.auth.createAccount}</h1>
           <p className="text-gray-500">
-            Enter your details to create your wardrobe account
+            {t.auth.enterDetails}
           </p>
         </div>
 
@@ -72,7 +75,7 @@ const Register = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>{t.auth.name}</FormLabel>
                     <FormControl>
                       <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -85,7 +88,7 @@ const Register = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t.auth.email}</FormLabel>
                     <FormControl>
                       <Input placeholder="email@example.com" {...field} />
                     </FormControl>
@@ -98,7 +101,7 @@ const Register = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t.auth.password}</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="******" {...field} />
                     </FormControl>
@@ -111,7 +114,7 @@ const Register = () => {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>{t.auth.confirmPassword}</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="******" {...field} />
                     </FormControl>
@@ -120,15 +123,15 @@ const Register = () => {
                 )}
               />
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating account..." : "Create account"}
+                {isLoading ? t.auth.creatingAccount : t.auth.signUp}
               </Button>
             </form>
           </Form>
         </div>
         <div className="text-center text-sm text-gray-500">
-          Already have an account?{" "}
+          {t.auth.alreadyHaveAccount}{" "}
           <Link to="/login" className="font-medium text-wardrobe-600 underline">
-            Sign in
+            {t.auth.signIn}
           </Link>
         </div>
       </div>

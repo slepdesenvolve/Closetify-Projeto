@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { useWardrobe } from "@/context/WardrobeContext";
 import { capitalizeFirstLetter } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ClothingCardProps {
   item: ClothingItem;
@@ -20,12 +21,33 @@ interface ClothingCardProps {
 
 const ClothingCard: React.FC<ClothingCardProps> = ({ item }) => {
   const { deleteItem } = useWardrobe();
+  const { t, language } = useLanguage();
 
   const categoryColors = {
     top: "bg-blue-100 text-blue-800",
     bottom: "bg-green-100 text-green-800",
     shoes: "bg-amber-100 text-amber-800",
     accessory: "bg-purple-100 text-purple-800",
+  };
+
+  const getCategoryName = (category: string) => {
+    switch (category) {
+      case "top": return t.clothing.tops;
+      case "bottom": return t.clothing.bottoms;
+      case "shoes": return t.clothing.footwear;
+      case "accessory": return t.clothing.accessories;
+      default: return capitalizeFirstLetter(category);
+    }
+  };
+
+  const getSeasonName = (season: string) => {
+    switch (season) {
+      case "spring": return t.clothing.spring;
+      case "summer": return t.clothing.summer;
+      case "fall": return t.clothing.fall;
+      case "winter": return t.clothing.winter;
+      default: return capitalizeFirstLetter(season);
+    }
   };
 
   return (
@@ -39,7 +61,7 @@ const ClothingCard: React.FC<ClothingCardProps> = ({ item }) => {
         <Badge 
           className={`absolute right-2 top-2 ${categoryColors[item.category]} border-none`}
         >
-          {capitalizeFirstLetter(item.category)}
+          {getCategoryName(item.category)}
         </Badge>
       </div>
       <CardHeader className="p-4 pb-2">
@@ -50,7 +72,7 @@ const ClothingCard: React.FC<ClothingCardProps> = ({ item }) => {
         <div className="mt-2 flex flex-wrap gap-1">
           {item.season.map((season) => (
             <Badge key={season} variant="outline" className="text-xs">
-              {capitalizeFirstLetter(season)}
+              {getSeasonName(season)}
             </Badge>
           ))}
           <Badge

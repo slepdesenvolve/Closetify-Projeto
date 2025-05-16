@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -27,6 +28,7 @@ const formSchema = z.object({
 
 const Login = () => {
   const { login, isLoading } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -50,14 +52,14 @@ const Login = () => {
     <div className="flex min-h-[calc(100vh-4rem)] flex-col justify-center">
       <div className="mx-auto flex w-full flex-col space-y-6 sm:w-[350px] md:w-[450px]">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-3xl font-bold text-wardrobe-600">Welcome back</h1>
+          <h1 className="text-3xl font-bold text-wardrobe-600">{t.auth.welcomeBack}</h1>
           <p className="text-gray-500">
-            Enter your credentials to access your wardrobe
+            {t.auth.enterCredentials}
           </p>
 
           <div className="mt-4">
             <p className="text-sm text-gray-500">
-              Demo credentials: demo@example.com / password
+              {t.auth.demoCredentials}
             </p>
           </div>
         </div>
@@ -70,7 +72,7 @@ const Login = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t.auth.email}</FormLabel>
                     <FormControl>
                       <Input placeholder="email@example.com" {...field} />
                     </FormControl>
@@ -83,7 +85,7 @@ const Login = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t.auth.password}</FormLabel>
                     <FormControl>
                       <Input type="password" placeholder="******" {...field} />
                     </FormControl>
@@ -92,15 +94,15 @@ const Login = () => {
                 )}
               />
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Signing in..." : "Sign in"}
+                {isLoading ? t.auth.signingIn : t.auth.signIn}
               </Button>
             </form>
           </Form>
         </div>
         <div className="text-center text-sm text-gray-500">
-          Don't have an account?{" "}
+          {t.auth.dontHaveAccount}{" "}
           <Link to="/register" className="font-medium text-wardrobe-600 underline">
-            Sign up
+            {t.auth.signUp}
           </Link>
         </div>
       </div>
